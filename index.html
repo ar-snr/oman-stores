@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل المنصات والمتاجر العُمانية</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
 
@@ -113,19 +112,22 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        .store-logo-wrapper {
+        /* الأفاتار الرقمي الدائري الفخم والمستقر 100% */
+        .store-avatar {
             width: 80px;
             height: 80px;
+            background-color: #f1f3f5;
+            color: #1a2e40;
+            font-size: 1.8rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
             border-radius: 50%;
-            background-color: #f8f9fa;
+            margin-bottom: 20px;
             border: 2px solid #d4af37;
-            color: #1a2e40;
-            font-size: 2rem;
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            user-select: none;
         }
 
         .store-card h3 {
@@ -183,119 +185,105 @@
     </main>
 
     <script>
-    // قاعدة البيانات بـ 14 متجراً عُمانياً مع كود الأيقونات الرقمية المستقرة
+    // قاعدة البيانات الشاملة بـ 14 متجراً عُمانياً حقيقياً وموثوقاً
     const omaniStores = [
         {
             id: 1,
             name: "عطور أمواج - Amouage",
             category: "perfumes",
             description: "دار العطور العُمانية العالمية الفاخرة، تقدم عطوراً مستوحاة من التراث العُماني العريق واللبان الفاخر.",
-            url: "https://www.amouage.com",
-            icon: "fa-solid fa-spray-can-sparkles"
+            url: "https://www.amouage.com"
         },
         {
             id: 2,
             name: "منصة بحار - Behar",
             category: "food",
             description: "المنصة العُمانية الأولى لتسويق وشراء الأسماك والمأكولات البحرية الطازجة مباشرة من الصيادين العُمانيين.",
-            url: "https://www.behar.om",
-            icon: "fa-solid fa-fish"
+            url: "https://www.behar.market/",
         },
         {
             id: 3,
             name: "منصة ثواني - Thawani",
             category: "electronics",
             description: "منصة الدفع الإلكتروني العُمانية الرائدة، وتضم دليلاً ذكياً للمتاجر والخدمات الرقمية في السلطنة.",
-            url: "https://thawani.om",
-            icon: "fa-solid fa-wallet"
+            url: "https://thawani.om"
         },
         {
             id: 4,
             name: "منصة إدلال - Edlal",
             category: "electronics", 
             description: "المنصة العُمانية الرائدة للابتكار والتعليم الرقمي، تقدم دورات وورش عمل تخصصية لبناء المهارات المستقبلية.",
-            url: "https://edlal.org",
-            icon: "fa-solid fa-graduation-cap"
+            url: "https://edlal.org"
         },
         {
             id: 5,
             name: "منصة رمان - Rouman",
             category: "fashion",
             description: "السوق الإلكتروني العُماني الرائد لتسوق الأزياء، الإكسسوارات، والمنتجات المتنوعة مع خدمات شحن سريعة.",
-            url: "https://rouman.com",
-            icon: "fa-solid fa-bag-shopping"
+            url: "https://www.eromman.com/ar/"
         },
         {
             id: 6,
             name: "أوليبان لمنتجات اللبان - Oliban",
             category: "perfumes",
             description: "منتجات عناية بالبشرة ومستحضرات تجميل طبيعية عُمانية فاخرة مستخلصة بالكامل من زيت اللبان النقي.",
-            url: "https://oliban.com",
-            icon: "fa-solid fa-spa"
+            url: "https://oliban.com"
         },
         {
             id: 7,
             name: "عمان إكسبريس - Oman Express",
             category: "fashion",
             description: "منصة تسوق عُمانية تتيح تصفح وشراء الملابس، الحقائب، والمستلزمات العصرية لجميع أفراد العائلة.",
-            url: "https://www.instagram.com/oman_express",
-            icon: "fa-solid fa-truck-fast"
+            url: "https://ar.aliexpress.com/"
         },
         {
             id: 8,
             name: "براند وشق للأزياء - Washq",
             category: "fashion",
             description: "منصة عُمانية رائدة ومتخصصة في تصميم وبيع الأزياء العُمانية التقليدية الفاخرة، والمصار، والكميم المطورة.",
-            url: "https://washq.om",
-            icon: "fa-solid fa-shirt"
+            url: "https://wshaq-moge.com/?srsltid=AfmBOorNoo988GXBWMcePWlvfp-DVVFl_clYmCWPQ_JiJvYH0HbbWr8y"
         },
         {
             id: 9,
             name: "منصة طلبات عُمان - Talabat",
             category: "food",
             description: "المنصة الرقمية الأولى والأشهر في سلطنة عُمان لطلب وتوصيل الأغذية، الوجبات، والمواد الاستهلاكية اليومية.",
-            url: "https://www.talabat.com/oman",
-            icon: "fa-solid fa-utensils"
+            url: "https://www.talabat.com/oman"
         },
         {
             id: 10,
             name: "شركة المطاحن العمانية",
             category: "food",
             description: "الشركة الرائدة الأولى في السلطنة لإنتاج الطحين عالي الجودة والأعلاف ومنتجات المخابز لدعم الأمن الغذائي العُماني.",
-            url: "http://www.omanflourmills.com/",
-            icon: "fa-solid fa-wheat-awn"
+            url: "http://www.omanflourmills.com/"
         },
         {
             id: 11,
             name: "شركة الشَّرع للتمور - Al Shara",
             category: "food",
             description: "منصة عُمانية رائدة لإنتاج وتغليف أفخر أنواع التمور العُمانية والحلويات التراثية بجودة ومواصفات عالمية.",
-            url: "https://www.instagram.com/alsharadates/",
-            icon: "fa-solid fa-tree"
+            url: "https://www.alsharashoping.com/"
         },
         {
             id: 12,
             name: "إكسترا عُمان - eXtra",
             category: "electronics",
             description: "الوجهة الكبرى والأشهر في سلطنة عُمان لتسوق الأجهزة المنزلية، الشاشات، الهواتف الذكية ومستلزماتها الرقمية.",
-            url: "https://www.extra.com/en-om/",
-            icon: "fa-solid fa-tv"
+            url: "https://www.extra.com/en-om/"
         },
         {
             id: 13,
             name: "شرف دي جي عُمان - Sharaf DG",
             category: "electronics",
             description: "سوق الإلكترونيات الرائد في عُمان، يضم تشكيلة واسعة من الكمبيوترات، الكاميرات، والأجهزة الذكية بضمان معتمد.",
-            url: "https://oman.sharafdg.com",
-            icon: "fa-solid fa-laptop"
+            url: "https://oman.sharafdg.com"
         },
         {
             id: 14,
             name: "براند كابي للمكياج - Capi",
             category: "perfumes",
             description: "منصة عُمانية متميزة جداً تقدم مستحضرات تجميل ومكياج راقية ومبتكرة صُممت خصيصاً لتناسب الجمال العربي.",
-            url: "https://www.instagram.com/capi_beauty/",
-            icon: "fa-solid fa-wand-magic-sparkles"
+            url: "https://kapy.om/?gad_source=1&gad_campaignid=23464908128&gbraid=0AAAAAqKwnjC8lyUDN0yt9cSPel_PuHrSc&gclid=EAIaIQobChMIt8OojsXIlAMVhX5BAh3O2xHJEAAYASAAEgIhWfD_BwE"
         }
     ];
 
@@ -310,11 +298,12 @@
             return;
         }
         storesToShow.forEach(store => {
+            // كود ذكي لاستخراج أول حرف من اسم المتجر تلقائياً وعرضه داخل الدائرة
+            const firstLetter = store.name.charAt(0);
+            
             const cardHTML = `
                 <div class="store-card" data-category="${store.category}">
-                    <div class="store-logo-wrapper">
-                        <i class="${store.icon}"></i>
-                    </div>
+                    <div class="store-avatar">${firstLetter}</div>
                     <h3>${store.name}</h3>
                     <p>${store.description}</p>
                     <a href="${store.url}" target="_blank" class="visit-btn">زيارة المتجر</a>
