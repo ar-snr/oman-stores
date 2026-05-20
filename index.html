@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل المنصات والمتاجر العُمانية</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a2e40, #2c4a6f);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            outline: none;
+            transition: 0.3s;
+        }
+
+        #searchInput:focus {
+            transform: scale(1.02);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: #d4af37;
+            color: white;
+            border-color: #d4af37;
+        }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .store-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .store-logo-wrapper {
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .store-logo {
+            max-width: 65%;
+            max-height: 65%;
+            object-fit: contain;
+        }
+
+        .store-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #1a2e40;
+        }
+
+        .store-card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            height: 70px;
+            overflow: hidden;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            background-color: #1a2e40;
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            margin-top: auto;
+        }
+
+        .visit-btn:hover {
+            background-color: #d4af37;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>دليلك للتسوق أونلاين في عُمان</h1>
+        <p>اكتشف أفضل المتاجر والمنصات العُمانية الموثوقة</p>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="ابحث عن متجر أو منتج...">
+        </div>
+    </header>
+
+    <nav class="categories">
+        <button class="category-btn active" data-category="all">الكل</button>
+        <button class="category-btn" data-category="fashion">أزياء وملابس</button>
+        <button class="category-btn" data-category="perfumes">عطور وتجميل</button>
+        <button class="category-btn" data-category="electronics">إلكترونيات</button>
+        <button class="category-btn" data-category="food">أغذية ومأكولات</button>
+    </nav>
+
+    <main class="stores-grid" id="storesGrid">
+    </main>
+
+    <script>
+	
+    // قاعدة البيانات المحدثة 100% مع صور الأيقونات المضمنة الجاهزة
+    const omaniStores = [
+        {
+            id: 1,
+            name: "عطور أمواج - Amouage",
+            category: "perfumes",
+            description: "دار العطور العُمانية العالمية الفاخرة، تقدم عطوراً مستوحاة من التراث العُماني العريق واللبان الفاخر.",
+            url: "https://www.amouage.com",
+            logo: "images/Amouage.png"
+        },
+        {
+            id: 2,
+            name: "منصة بحار - Behar",
+            category: "food",
+            description: "المنصة العُمانية الأولى لتسويق وشراء الأسماك والمأكولات البحرية الطازجة مباشرة من الصيادين العُمانيين.",
+            url: "https://www.behar.om",
+            logo: "images/behar.png"
+        },
+        {
+            id: 3,
+            name: "منصة ثواني - Thawani",
+            category: "electronics",
+            description: "منصة الدفع الإلكتروني العُمانية الرائدة، وتضم دليلاً ذكياً للمتاجر والخدمات الرقمية في السلطنة.",
+            url: "https://thawani.om",
+            logo: "images/thawani.png"
+        },
+        {
+            id: 4,
+            name: "منصة إدلال - Edlal",
+            category: "electronics", 
+            description: "المنصة العُمانية الرائدة للابتكار والتعليم الرقمي، تقدم دورات وورش عمل تخصصية لبناء المهارات المستقبلية.",
+            url: "https://edlal.org",
+            logo: "images/Edlal.png"
+        },
+        {
+            id: 5,
+            name: "منصة رمان - Rouman",
+            category: "fashion",
+            description: "السوق الإلكتروني العُماني الرائد لتسوق الأزياء، الإكسسوارات، والمنتجات المتنوعة مع خدمات شحن سريعة.",
+            url: "https://rouman.com",
+            logo: "images/Rouman.png"
+        },
+        {
+            id: 6,
+            name: "أوليبان لمنتجات اللبان - Oliban",
+            category: "perfumes",
+            description: "منتجات عناية بالبشرة ومستحضرات تجميل طبيعية عُمانية فاخرة مستخلصة بالكامل من زيت اللبان النقي.",
+            url: "https://oliban.com",
+            logo: "https://img.icons8.com/color/96/spa.png"
+        },
+        {
+            id: 7,
+            name: "عمان إكسبريس - Oman Express",
+            category: "fashion",
+            description: "منصة تسوق عُمانية تتيح تصفح وشراء الملابس، الحقائب، والمستلزمات العصرية لجميع أفراد العائلة.",
+            url: "https://ar.aliexpress.com/?gatewayAdapt=glo2ara",
+            logo: "images/ailexpress.png"
+        },
+        {
+            id: 8,
+            name: "براند وشق موجي للعطور- Washq",
+            category: "fashion",
+            description: "منصة عُمانيةة لبيع العطوروالبخور الفاخر.",
+            url: "https://wshaq-moge.com/?srsltid=AfmBOoo8a80Pp8WbAJb8pxyBlvZWkGfrfh_EaQXfWsBSzMwobO6VIYL0",
+            logo: "https://img.icons8.com/color/96/crown.png"
+        },
+        {
+            id: 9,
+            name: "منصة طلبات عُمان - Talabat",
+            category: "food",
+            description: "المنصة الرقمية الأولى والأشهر في سلطنة عُمان لطلب وتوصيل الأغذية، الوجبات، والمواد الاستهلاكية اليومية.",
+            url: "https://www.talabat.com/oman",
+            logo: "images/talabat.jpg"
+        },
+        {
+            id: 10,
+            name: "شركة المطاحن العمانية",
+            category: "food",
+            description: "الشركة الرائدة الأولى في السلطنة لإنتاج الطحين عالي الجودة والأعلاف ومنتجات المخابز لدعم الأمن الغذائي العُماني.",
+            url: "http://www.omanflourmills.com/",
+            logo: "https://img.icons8.com/color/96/wheat.png"
+        },
+        {
+            id: 11,
+            name: "شركة الشَّرع للتمور - Al Shara",
+            category: "food",
+            description: "منصة عُمانية رائدة لإنتاج وتغليف أفخر أنواع التمور العُمانية والحلويات التراثية بجودة ومواصفات عالمية.",
+            url: "https://www.alsharashoping.com/",
+            logo: "images/alshara.png" /* أيقونة تعبيرية دائرية فخمة تمثل التمور والمحاصيل الثمينة */
+        },
+        {
+            id: 12,
+            name: "إكسترا عُمان - eXtra",
+            category: "electronics",
+            description: "الوجهة الكبرى والأشهر في سلطنة عُمان لتسوق الأجهزة المنزلية، الشاشات، الهواتف الذكية ومستلزماتها الرقمية.",
+            url: "https://www.extra.com/en-om/",
+            logo: "images/eXtra.jpg"
+        },
+        {
+            id: 13,
+            name: "شرف دي جي عُمان - Sharaf DG",
+            category: "electronics",
+            description: "سوق الإلكترونيات الرائد في عُمان، يضم تشكيلة واسعة من الكمبيوترات، الكاميرات، والأجهزة الذكية بضمان معتمد.",
+            url: "https://oman.sharafdg.com",
+            logo: "images/sharaf.jpg"
+        },
+        {
+            id: 14,
+            name: "براند كابي للمكياج - Capi",
+            category: "perfumes",
+            description: "منصة عُمانية متميزة جداً تقدم مستحضرات تجميل ومكياج راقية ومبتكرة صُممت خصيصاً لتناسب الجمال العربي.",
+            url: "https://kapy.om/?gad_source=1&gad_campaignid=23530373428&gbraid=0AAAAAqKwnjDsEo6yzYBaCdcJl1Xpa_nRa&gclid=EAIaIQobChMIob77lbjIlAMVvplQBh12Ag5tEAAYASAAEgJcF_D_BwE",
+            logo: "images/kapy.jpg"
+        }
+    ];
+
+    const storesGrid = document.getElementById('storesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const categoryButtons = document.querySelectorAll('.category-btn');
+
+    function displayStores(storesToShow) {
+        storesGrid.innerHTML = ""; 
+        if(storesToShow.length === 0) {
+            storesGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #666; padding: 20px;">عذراً، لم يتم العثور على متاجر تطابق بحثك.</p>`;
+            return;
+        }
+        storesToShow.forEach(store => {
+            const cardHTML = `
+                <div class="store-card" data-category="${store.category}">
+                    <div class="store-logo-wrapper">
+                        <img src="${store.logo}" alt="${store.name}" class="store-logo">
+                    </div>
+                    <h3>${store.name}</h3>
+                    <p>${store.description}</p>
+                    <a href="${store.url}" target="_blank" class="visit-btn">زيارة المتجر</a>
+                </div>
+            `;
+            storesGrid.insertAdjacentHTML('beforeend', cardHTML);
+        });
+    }
+
+    displayStores(omaniStores);
+
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredStores = omaniStores.filter(store => {
+            return store.name.toLowerCase().includes(searchTerm) || 
+                   store.description.toLowerCase().includes(searchTerm);
+        });
+        displayStores(filteredStores);
+    });
+
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const selectedCategory = button.getAttribute('data-category');
+            if(selectedCategory === 'all') {
+                displayStores(omaniStores);
+            } else {
+                const filtered = omaniStores.filter(store => store.category === selectedCategory);
+                displayStores(filtered);
+            }
+        });
+    });
+    </script>
+</body>
+</html>
