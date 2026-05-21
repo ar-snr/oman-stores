@@ -164,6 +164,133 @@
         .visit-btn:hover {
             background-color: #d4af37;
         }
+		/* زر أضف متجرك الفخم */
+.add-store-trigger {
+    display: inline-block;
+    background-color: #d4af37;
+    color: #1a2e40;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-bottom: 25px;
+}
+
+.add-store-trigger:hover {
+    background-color: white;
+    color: #1a2e40;
+    transform: translateY(-2px);
+}
+
+/* واجهة النافذة المنبثقة (Popup Modal) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    transform: translateY(-20px);
+    transition: 0.3s ease;
+}
+
+.modal-overlay.active .modal-box {
+    transform: translateY(0);
+}
+
+.modal-box h2 {
+    color: #1a2e40;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: #1a2e40;
+    box-shadow: 0 0 5px rgba(26,46,64,0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #1a2e40;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #d4af37;
+}
     </style>
 </head>
 <body>
@@ -182,11 +309,48 @@
         <button class="category-btn" data-category="perfumes">عطور وتجميل</button>
         <button class="category-btn" data-category="electronics">إلكترونيات</button>
         <button class="category-btn" data-category="food">أغذية ومأكولات</button>
+		<button class="category-btn" data-category="productive-families">دعم الأسر المنتجة 🏡</button>
+		<button class="add-store-trigger" id="openModalBtn">أضف متجرك معنا 🇴🇲</button>
     </nav>
 
     <main class="stores-grid" id="storesGrid">
     </main>
-
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+        <button class="close-modal" id="closeModalBtn">&times;</button>
+        <h2>طلب إضافة متجر جديد</h2>
+        
+        <form action="https://formspree.io/f/xanykgzo" method="POST">
+            <div class="form-group">
+                <label>اسمك الكريم:</label>
+                <input type="text" name="صاحب الطلب" required placeholder="مثال: أحمد البوسعيدي">
+            </div>
+            <div class="form-group">
+                <label>اسم المتجر / المنصة:</label>
+                <input type="text" name="اسم المتجر" required placeholder="مثال: براند سدرة">
+            </div>
+			<div class="form-group">
+    <label>قسم المتجر:</label>
+    <select name="القسم" required>
+        <option value="fashion">أزياء وملابس</option>
+        <option value="perfumes">عطور وتجميل</option>
+        <option value="electronics">إلكترونيات</option>
+        <option value="food">أغذية ومأكولات</option>
+        <option value="productive-families">دعم الأسر المنتجة (مشاريع منزلية)</option>
+    </select>
+</div>
+            <div class="form-group">
+                <label>رابط المتجر (موقع أو انستغرام):</label>
+                <input type="url" name="الرابط" required placeholder="https://instagram.com/yourstore">
+            </div>
+            <div class="form-group">
+                <label>وصف مختصر ومميز للمتجر:</label>
+                <textarea name="الوصف" rows="3" required placeholder="اكتب نبذة عن المنتجات التي تقدمها..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">إرسال الطلب للمراجعة</button>
+        </form>
+    </div>
+</div>
     <script>
     // قاعدة البيانات الشاملة بـ 14 متجراً عُمانياً حقيقياً وموثوقاً
     const omaniStores = [
@@ -287,7 +451,35 @@
             category: "perfumes",
             description: "منصة عُمانية متميزة جداً تقدم مستحضرات تجميل ومكياج راقية ومبتكرة صُممت خصيصاً لتناسب الجمال العربي.",
             url: "https://kapy.om/?gad_source=1&gad_campaignid=23464908128&gbraid=0AAAAAqKwnjC8lyUDN0yt9cSPel_PuHrSc&gclid=EAIaIQobChMIt8OojsXIlAMVhX5BAh3O2xHJEAAYASAAEgIhWfD_BwE"
-        }
+        },
+		{
+    id: 15,
+    name: "chocotreat",
+    category: "productive-families",
+    description: "مشروع منزلي عُماني رائد يقدم أفخر أنواع الحلويات المصنوعة بجودة ونكهة منزلية أصيلة.",
+    url: "https://www.instagram.com/chocotreat.om?igsh=OXR2ZWxpbmR2c2Uy"
+},
+{
+    id: 16,
+    name: "رداء للأزياء - Redaa",
+    category: "productive-families",
+    description: "مشروع محلي متميز لتصميم وتفصيل العبايات والأزياء النسائية العصرية بلمسات وهندسة خياطة منزلية متقنة.",
+    url: "https://www.instagram.com/redaa_om?igsh=YXM4djN4bWU3Ymp0"
+},
+{
+    id: 17,
+    name: "78sweet",
+    category: "productive-families",
+    description: "مشروع منزلي عُماني رائد يقدم أفخر انواع الكيك المصنوعة بجودة ونكهة منزلية أصيلة.",
+    url: "https://www.instagram.com/78sweet.om?igsh=eGFnOHR0N3o2NWVp"
+},
+{
+    id: 18,
+    name: "senora nails",
+    category: "productive-families",
+    description: "مشروع محلي متميز لتصميم اجمل اشكال الاظافر النسائيه.",
+    url: "https://www.instagram.com/senora20_?igsh=MXNqa2Nvd3oyejNrcQ=="
+}
     ];
 
     const storesGrid = document.getElementById('storesGrid');
@@ -339,6 +531,16 @@
                 displayStores(filtered);
             }
         });
+		// كود تشغيل وتأثيرات النافذة المنبثقة للـ Form
+const modalOverlay = document.getElementById('modalOverlay');
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+
+openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));
+closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('active'));
+modalOverlay.addEventListener('click', (e) => {
+    if(e.target === modalOverlay) modalOverlay.classList.remove('active');
+});
     });
     </script>
 </body>
